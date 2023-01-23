@@ -2,6 +2,7 @@
   import { CellState } from "../data/Cell";
   import Cell from "./Cell.svelte";
   import * as _ from "lodash";
+  import { cssVariables } from "../utils";
 
   let s: string = "inn";
 
@@ -10,24 +11,9 @@
   export let height: number = 15;
 
   cells = _.chunk(_.fill(new Array(width * height), new CellState()), width);
-
-  function cssVariables(node: any, variables: any) {
-    setCssVariables(node, variables);
-
-    return {
-      update(variables: any) {
-        setCssVariables(node, variables);
-      },
-    };
-  }
-  function setCssVariables(node, variables) {
-    for (const name in variables) {
-      node.style.setProperty(`--${name}`, variables[name]);
-    }
-  }
 </script>
 
-<div class="grid" use:cssVariables={{ width, height }}>
+<div id="board-container" use:cssVariables={{ width, height }}>
   {#each cells as cellRow}
     {#each cellRow as cell}
       <Cell {cell} />
@@ -36,10 +22,13 @@
 </div>
 
 <style>
-  .grid {
+  #board-container {
     display: grid;
     grid-template-rows: repeat(var(--width), 1fr);
     grid-template-columns: repeat(var(--height), 1fr);
+    gap: 1px;
+    background-color: black;
+    border: 1px solid black;
     width: 300px;
     height: 300px;
   }

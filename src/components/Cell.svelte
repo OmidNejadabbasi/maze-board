@@ -4,12 +4,10 @@
   export let cell: CellState = new CellState();
 </script>
 
-<div>
-  {cell.isVisted ? "" : "*"}
-</div>
+<div />
 
 <style>
   div {
-    border: 1px solid gray;
+    background-color: white;
   }
 </style>

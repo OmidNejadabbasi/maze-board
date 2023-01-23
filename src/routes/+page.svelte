@@ -1,9 +1,8 @@
 <script>
+  import "../app.css";
   import Board from "../components/Board.svelte";
 </script>
 
-<h1>Welcome to SvelteKit</h1>
-<p>
-  Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation
-</p>
-<Board />
+<div class="flex justify-center">
+  <Board />
+</div>
