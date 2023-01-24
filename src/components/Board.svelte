@@ -10,7 +10,7 @@
   export let width: number = 15;
   export let height: number = 15;
 
-  cells = _.chunk(_.fill(new Array(width * height), new CellState()), width);
+  cells = _.chunk(_.fill(new Array(width * height), CellState.BLANK), width);
 </script>
 
 <div id="board-container" use:cssVariables={{ width, height }}>
