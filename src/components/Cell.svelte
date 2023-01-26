@@ -16,7 +16,7 @@
         ? "yellow"
         : c.value === 3
         ? "red"
-        : "black";
+        : "#333";
   });
   onDestroy(() => sub.unsubscribe());
 </script>
