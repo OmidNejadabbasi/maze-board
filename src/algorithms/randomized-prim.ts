@@ -14,6 +14,8 @@ export class RandomizedPrim extends MazeGenAlgorithm {
     let stack: Point[] = [];
     let startP = this.makeReadyForStart(board);
     startP.x--;
-    // TODO implement you silly
+
+    let walls: Point[] = [];
+    while (true) {}
   }
 }

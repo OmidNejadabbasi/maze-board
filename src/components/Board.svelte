@@ -4,12 +4,15 @@
   import * as _ from "lodash";
   import { cssVariables } from "../utils";
   import { BehaviorSubject } from "rxjs";
+  import { setContext } from "svelte";
 
   let s: string = "inn";
 
   export let cells: BehaviorSubject<CellState>[][] = [];
   export let width: number = 45;
   export let height: number = 45;
+  let mouseDown = false;
+  setContext("mouseDown", { mouseDown: () => mouseDown });
 
   cells = _.chunk(_.fill(new Array(width * height), null), width);
 
@@ -18,9 +21,21 @@
       cells[i][j] = new BehaviorSubject<CellState>(CellState.BLANK);
     }
   }
+
+  function onMouseDown() {
+    mouseDown = true;
+  }
+  function onMouseUp() {
+    mouseDown = false;
+  }
 </script>
 
-<div id="board-container" use:cssVariables={{ width, height }}>
+<div
+  id="board-container"
+  use:cssVariables={{ width, height }}
+  on:mousedown={onMouseDown}
+  on:mouseup={onMouseUp}
+>
   {#each cells as cellRow}
     {#each cellRow as cell}
       <Cell {cell} />
