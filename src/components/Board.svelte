@@ -8,8 +8,8 @@
   let s: string = "inn";
 
   export let cells: BehaviorSubject<CellState>[][] = [];
-  export let width: number = 25;
-  export let height: number = 25;
+  export let width: number = 45;
+  export let height: number = 45;
 
   cells = _.chunk(_.fill(new Array(width * height), null), width);
 
@@ -35,7 +35,7 @@
     grid-template-columns: repeat(var(--width), 1fr);
     gap: 0px;
     border: 1px solid black;
-    width: 600px;
-    height: 600px;
+    width: 500px;
+    height: 500px;
   }
 </style>

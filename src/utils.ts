@@ -13,7 +13,7 @@ function setCssVariables(node, variables) {
   }
 }
 
-function sleep(ms: number): Promise<void> {
+export function sleep(ms: number): Promise<void> {
   return new Promise((res, rej) => {
     setTimeout(res, ms);
   });

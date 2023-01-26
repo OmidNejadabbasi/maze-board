@@ -13,7 +13,7 @@
       c.value === 0
         ? "white"
         : c.value === 1
-        ? "yellow"
+        ? "gold"
         : c.value === 3
         ? "red"
         : "#333";
