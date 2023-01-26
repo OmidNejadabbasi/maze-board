@@ -24,7 +24,7 @@
     <div class="flex">
       <Button
         color="#e32423"
-        on:click={() => runAlgorithm(new RecursiveBackTracking())}
+        on:click={() => runAlgorithm(new RecursiveBackTracking(cells))}
         >Back tracing</Button
       >
       <Button color="#242e99">Back tracing</Button>

@@ -2,20 +2,16 @@ import { BehaviorSubject } from "rxjs";
 import { CellState } from "../data/Cell";
 import { Point } from "../data/Point";
 import { randRange, sleep } from "../utils";
-import { Algorithm } from "./algorithm";
+import { Algorithm, MazeGenAlgorithm } from "./algorithm";
 import { fillWithState } from "./board-utils";
 import * as _ from "lodash";
 import Cell from "../components/Cell.svelte";
 
-export class RecursiveBackTracking
-  implements Algorithm<BehaviorSubject<CellState>[][]>
-{
+export class RecursiveBackTracking extends MazeGenAlgorithm {
   private SLEEP_MS = 20;
   async do(board: BehaviorSubject<CellState>[][]): Promise<void> {
-    let width = board[0].length;
-    let height = board.length;
     let stack: Point[] = [];
-    let startP = this.makeReadyForStart(board);
+    let startP = super.makeReadyForStart(board);
     startP.x--;
     board[startP.x][startP.y].next(CellState.BLANK_V);
     stack.push(startP);
@@ -25,13 +21,13 @@ export class RecursiveBackTracking
       if (!p) break;
 
       let nextPoints: Point[] = [];
-      if (p.x + 2 < height && !board[p.x + 2][p.y].getValue().isVisited) {
+      if (p.x + 2 < this.height && !board[p.x + 2][p.y].getValue().isVisited) {
         nextPoints.push(new Point(p.x + 2, p.y));
       }
       if (p.x - 2 > 0 && !board[p.x - 2][p.y].getValue().isVisited) {
         nextPoints.push(new Point(p.x - 2, p.y));
       }
-      if (p.y + 2 < width && !board[p.x][p.y + 2].getValue().isVisited) {
+      if (p.y + 2 < this.width && !board[p.x][p.y + 2].getValue().isVisited) {
         nextPoints.push(new Point(p.x, p.y + 2));
       }
       if (p.y - 2 > 0 && !board[p.x][p.y - 2].getValue().isVisited) {
@@ -55,16 +51,5 @@ export class RecursiveBackTracking
       await sleep(this.SLEEP_MS);
       board[np.x][np.y].next(CellState.BLANK_V);
     }
-  }
-
-  makeReadyForStart(board: BehaviorSubject<CellState>[][]): Point {
-    let width = board[0].length;
-    let height = board.length;
-    fillWithState(board, CellState.FILLED);
-
-    let start = new Point(height - 1, randRange(1, (width - 1) / 2) * 2 - 1);
-    board[0][randRange(1, (width - 1) / 2) * 2 - 1].next(CellState.ENDPOINT);
-    board[start.x][start.y].next(CellState.ENDPOINT);
-    return start;
   }
 }
