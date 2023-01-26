@@ -3,14 +3,21 @@
   import Cell from "./Cell.svelte";
   import * as _ from "lodash";
   import { cssVariables } from "../utils";
+  import { BehaviorSubject } from "rxjs";
 
   let s: string = "inn";
 
-  export let cells: CellState[][] = [];
-  export let width: number = 15;
-  export let height: number = 15;
+  export let cells: BehaviorSubject<CellState>[][] = [];
+  export let width: number = 35;
+  export let height: number = 35;
 
-  cells = _.chunk(_.fill(new Array(width * height), CellState.BLANK), width);
+  cells = _.chunk(_.fill(new Array(width * height), null), width);
+
+  for (let i = 0; i < cells.length; i++) {
+    for (let j = 0; j < cells[i].length; j++) {
+      cells[i][j] = new BehaviorSubject<CellState>(CellState.BLANK);
+    }
+  }
 </script>
 
 <div id="board-container" use:cssVariables={{ width, height }}>
@@ -24,8 +31,8 @@
 <style>
   #board-container {
     display: grid;
-    grid-template-rows: repeat(var(--width), 1fr);
-    grid-template-columns: repeat(var(--height), 1fr);
+    grid-template-rows: repeat(var(--height), 1fr);
+    grid-template-columns: repeat(var(--width), 1fr);
     gap: 1px;
     background-color: black;
     border: 1px solid black;

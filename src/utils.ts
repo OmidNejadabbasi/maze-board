@@ -20,5 +20,5 @@ function sleep(ms: number): Promise<void> {
 }
 
 export function randRange(start, end) {
-  return Number.parseInt(Math.random() * (end - start) + start) - 1;
+  return Math.floor(Math.random() * (end - start) + start);
 }
