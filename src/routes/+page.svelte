@@ -2,6 +2,7 @@
   import { BehaviorSubject } from "rxjs";
   import { run } from "svelte/internal";
   import { Algorithm } from "../algorithms/algorithm";
+  import { RandomizedPrim } from "../algorithms/randomized-prim";
   import { RecursiveBackTracking } from "../algorithms/recursive-backtracking";
   import "../app.css";
   import Board from "../components/Board.svelte";
@@ -27,10 +28,14 @@
         on:click={() => runAlgorithm(new RecursiveBackTracking(cells))}
         >Back tracing</Button
       >
-      <Button color="#242e99">Back tracing</Button>
+      <Button
+        color="#242e99"
+        on:click={() => runAlgorithm(new RandomizedPrim(cells))}
+        >Prim's Algorithm</Button
+      >
       <Button color="#23e324">Back tracing</Button>
     </div>
   </div>
   <div class="h-12" />
-  <Board bind:cells />
+  <Board bind:cells width={65} height={65} />
 </div>
