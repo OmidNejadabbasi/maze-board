@@ -18,7 +18,7 @@
   }
 </script>
 
-<div class="flex flex-col items-center">
+<div class="flex flex-col items-center min-h-full">
   <div class="flex flex-col ">
     <p class="text-center">Generate Maze with:</p>
     <div class="h-3" />
@@ -38,4 +38,11 @@
   </div>
   <div class="h-12" />
   <Board bind:cells width={65} height={65} />
+
+  <div class="flex mt-auto text-center p-1 align-center gap-4">
+    <div>Made with ❤ by Omid.N</div>
+    <a href="https://github.com/OmidNejadabbasi">
+      <img src="./github-mark.svg" alt="" class="w-5 h-5" />
+    </a>
+  </div>
 </div>
