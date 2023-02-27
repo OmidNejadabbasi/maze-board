@@ -14,7 +14,6 @@ export function fillWithState(
     for (let j = 0; j < board[i].length; j++) {
       count++;
       board[i][j].next(state);
-      console.log(count);
     }
   }
   console.log("count " + count);

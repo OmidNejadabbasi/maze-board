@@ -8,7 +8,7 @@ export abstract class Algorithm<T> {
   abstract do(t: T): void;
 }
 
-export abstract class MazeGenAlgorithm extends Algorithm<
+export abstract class MazeAlgorithm extends Algorithm<
   BehaviorSubject<CellState>[][]
 > {
   width: number;
@@ -18,7 +18,8 @@ export abstract class MazeGenAlgorithm extends Algorithm<
     this.width = board[0].length;
     this.height = board.length;
   }
-
+}
+export abstract class MazeGenAlgorithm extends MazeAlgorithm {
   protected makeReadyForStart(board: BehaviorSubject<CellState>[][]): Point {
     let width = board[0].length;
     let height = board.length;
